@@ -18,3 +18,6 @@ from subscriber
 
 select sms_date , sender as p1 , receiver as p2 , sms_no1 + sms_no as total_message from cte1 where sender1 = receiver and sender = receiver1
 select * from subscriber
+
+
+This is correct
