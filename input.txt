@@ -6,3 +6,15 @@ Pyspark code
 %sql 
 
 SELECT * FROM EMP
+
+%sql 
+
+with cte1 as (
+select * , lead(receiver,1,sender) over(order by (select 1) ) as receiver1 ,
+lead(sender,1,receiver) over(order by (select 1) ) as sender1,
+lead(sms_no,1,0) over(order by (select 1) ) as sms_no1
+from subscriber
+)
+
+select sms_date , sender as p1 , receiver as p2 , sms_no1 + sms_no as total_message from cte1 where sender1 = receiver and sender = receiver1
+select * from subscriber
